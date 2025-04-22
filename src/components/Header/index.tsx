@@ -11,9 +11,12 @@ type Props = {
 }
 
 const Header = ({ itensNoCarrinho, favoritos }: Props) => {
+  //FUNÇÃO PARA SOMAR O VALOR TOTAL. USA O REDUCE PARA REDUZIR O ARRAY A UM VALOR SÓ
+  //ACC = ACUMULADOR, OU SEJA, SOMA O VALOR DO ITEM AO TOTAL ACUMULADO
   const valorTotal = itensNoCarrinho.reduce((acc, item) => {
     acc += item.preco
     return acc
+    //INICIA COM O VALOR 0
   }, 0)
 
   return (
@@ -23,6 +26,7 @@ const Header = ({ itensNoCarrinho, favoritos }: Props) => {
         <span>{favoritos.length} favoritos</span>
         <img src={cesta} />
         <span>
+          {/* PEGA A FUNÇÃO DE TRANSFORMAR EM REAL E ADICONA O VALOR EM REAL */}
           {itensNoCarrinho.length} itens, valor total: {paraReal(valorTotal)}
         </span>
       </div>

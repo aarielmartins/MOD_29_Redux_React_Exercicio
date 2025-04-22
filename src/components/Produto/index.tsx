@@ -1,13 +1,16 @@
 import { Produto as ProdutoType } from '../../App'
 import * as S from './styles'
 
+//ESSE COMPONENTE RENDERIZA CADA PRODUTO INDIVIDUALMENTE
 type Props = {
   produto: ProdutoType
+  //FUNÇÕES AO COMPRAR E AO FAVORITAR
   aoComprar: (produto: ProdutoType) => void
   favoritar: (produto: ProdutoType) => void
   estaNosFavoritos: boolean
 }
 
+//FUNÇÃO PARA TRANSFORMAR O VALOR EM REAL
 export const paraReal = (valor: number) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
     valor
