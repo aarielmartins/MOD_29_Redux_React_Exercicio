@@ -1,6 +1,7 @@
 import { Produto as ProdutoType } from '../App'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../store'
+import { useGetProdutosQuery } from '../services/api'
 //IMPORTAÇÃO DO PRODUTOCOMPONENT, COM A RENDERIZAÇÃO DE CADA PRODUTO
 //POIS É O ARQUIVO DEFAULT DO COMPONENTE
 import Produto from '../components/Produto'
@@ -9,12 +10,8 @@ import * as S from './styles'
 
 //ESSE COMPONENTE MOSTRA A LISTA DE TODOS OS PRODUTOS JUNTOS
 
-//RECEBE AS PROPS DO APP E REPASSA PARA OS CARDS
-type Props = {
-  produtos: ProdutoType[]
-}
-
-const ProdutosComponent = ({ produtos }: Props) => {
+const ProdutosComponent = () => {
+  const { data: products } = useGetProdutosQuery()
   const fav = useSelector((state: RootReducer) => state.favorito.itens)
 
   //FUNÇÃO PARA VERIFICAR SE O PRODUTO JA ESTA NOS FAVORITOS
@@ -30,7 +27,7 @@ const ProdutosComponent = ({ produtos }: Props) => {
     <>
       <S.Produtos>
         {/* O MAP PERCORRE O ARRAY DE PRODUTOS DA API E RENDERIZA CADA UM */}
-        {produtos.map((produto) => (
+        {products?.map((produto) => (
           // O PRODUTO INDIVIDUALMENTE
           <Produto
             estaNosFavoritos={produtoEstaNosFavoritos(produto)}
